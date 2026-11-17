@@ -14,7 +14,6 @@ export default function Home() {
   return (
     <Page>
       <div className="page-home">
-        <Thread />
         <PageHeader className="hero">
           <CorridorGlobe />
           <div className="wrap">
@@ -32,7 +31,10 @@ export default function Home() {
           <p className="globe-note">Example corridors, for illustration</p>
         </PageHeader>
 
-        <Problem />
+        {/* The corridor line starts at the first section after the hero and runs to the end of the page. */}
+        <div className="page-flow">
+          <Thread />
+          <Problem />
 
         <section className="s">
           <div className="wrap">
@@ -67,6 +69,7 @@ export default function Home() {
         <TrustShield eyebrow={HOME.trust.eyebrow} title={HOME.trust.title} lead={HOME.trust.lead} />
 
         <CtaBand {...HOME.cta} />
+        </div>
       </div>
     </Page>
   );

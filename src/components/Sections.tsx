@@ -5,7 +5,7 @@ import { LiveScene } from "@/components/LiveScene";
 import { LivingMark } from "@/components/PaythonicMark";
 import { BEFORE_AFTER, DEVELOPERS, ORBIT, PROBLEM, SHOWCASE, STORY, TRUST_PILLARS } from "@/content/site";
 
-const THREAD_D = "M97 40 C 97 160 99 240 96 330 S 98 520 97 620 S 95 820 97 980";
+const THREAD_D = "M97 0 C 97 160 99 240 96 330 S 98 520 97 620 S 95 820 97 990";
 const TANGLE = "M0 40 C 120 160 200 -40 320 120 S 520 20 640 140 S 820 0 900 90";
 const css = (v: Record<string, string | number>) => v as React.CSSProperties;
 
@@ -18,7 +18,7 @@ export function Problem() {
         <div className="wrap problem-stage">
           <p className="eyebrow">{PROBLEM.eyebrow}</p>
           <h2>{PROBLEM.title}</h2>
-          <svg className="untangle" viewBox="0 0 900 160" preserveAspectRatio="none" aria-hidden="true">
+          <svg className="untangle" viewBox="0 -40 900 240" preserveAspectRatio="none" aria-hidden="true">
             {[0, 1, 2, 3].map((i) => <path key={i} d={TANGLE} transform={`translate(0 ${i * 6})`} />)}
           </svg>
           <p className="lead">{PROBLEM.lead}</p>
