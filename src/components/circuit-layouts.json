@@ -1,0 +1,5 @@
+{
+  "_": "Circuit chip layouts. One source for Circuit.tsx (chip centres in the 900x450 viewBox) and scripts/gen-circuit-css.mjs (w = each step's window in %, dur = loop seconds). Rerun the script after any change here.",
+  "5": { "points": [[90, 220], [270, 110], [450, 330], [630, 110], [810, 220]], "w": 16, "dur": 8 },
+  "6": { "points": [[90, 220], [270, 110], [450, 110], [450, 330], [630, 330], [810, 220]], "w": 14, "dur": 9 }
+}

@@ -4,7 +4,7 @@ import { CONTACT, SITE } from "@/content/site";
 
 export function Footer() {
   return (
-    <footer className="footer">
+    <footer className="footer s dk">
       <div className="wrap">
         <div className="cols">
           <div>
@@ -26,7 +26,7 @@ export function Footer() {
         </div>
         <div className="legal">
           <span>{SITE.legal}</span>
-          <span>© {new Date().getFullYear()} {SITE.name}</span>
+          <span>© {SITE.copyrightYear} {SITE.name}</span>
         </div>
       </div>
     </footer>

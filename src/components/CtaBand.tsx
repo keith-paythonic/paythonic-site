@@ -10,10 +10,11 @@ export function DemoButton({ small = false }: { small?: boolean }) {
   );
 }
 
-/** Closing band on every page, centred (Keith's round-4 note). */
+/** Closing band on every page: centred (round 4), framed by a glowing arc of light (redesign pick E4). */
 export function CtaBand({ title, lead }: { title: string; lead: string }) {
   return (
-    <section className="cta-band">
+    <section className="cta-band s dk">
+      <div className="arc" aria-hidden="true" />
       <div className="wrap reveal">
         <h2>{title}</h2>
         <p className="lead">{lead}</p>

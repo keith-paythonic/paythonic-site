@@ -94,12 +94,3 @@ export function LiveScene({ kind }: { kind: SceneKey }) {
     </div>
   );
 }
-
-export function SceneCard({ scene, title, text }: { scene: SceneKey; title: string; text: string }) {
-  return (
-    <article className="card">
-      <LiveScene kind={scene} />
-      <div className="body"><h3>{title}</h3><p>{text}</p></div>
-    </article>
-  );
-}
