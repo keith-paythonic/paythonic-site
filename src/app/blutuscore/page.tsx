@@ -1,62 +1,62 @@
 import type { Metadata } from "next";
+import { Circuit } from "@/components/Circuit";
 import { CtaBand } from "@/components/CtaBand";
-import { ArchitectureFlow, CodeSync } from "@/components/Diagrams";
-import { SceneCard } from "@/components/LiveScene";
+import { GlassObject } from "@/components/Glass";
+import { Developers, PartnerOrbit, Showcase } from "@/components/Sections";
 import { Page, PageHeader } from "@/components/Page";
-import { BLUTUSCORE } from "@/content/site";
+import { BLUTUSCORE, CIRCUIT_MODULES, PARTNER_NETWORK } from "@/content/site";
 
 export const metadata: Metadata = { title: "BlutusCore", description: BLUTUSCORE.lead };
 
 export default function BlutusCorePage() {
+  const { integration } = BLUTUSCORE;
   return (
     <Page>
-      <PageHeader className="page-head">
+      <PageHeader className="hero page-head">
         <div className="wrap">
           <p className="eyebrow">{BLUTUSCORE.eyebrow}</p>
-          <h1>{BLUTUSCORE.title}</h1>
+          <h1 className="metal">{BLUTUSCORE.title}</h1>
           <p className="subtitle">{BLUTUSCORE.subtitle}</p>
           <p className="lead">{BLUTUSCORE.lead}</p>
         </div>
       </PageHeader>
 
-      <section className="band">
+      <section className="s">
         <div className="wrap">
           <div className="reveal">
             <p className="eyebrow">Platform modules</p>
             <h2>Six modules, one platform</h2>
           </div>
-          <div className="grid3 reveal">
-            {BLUTUSCORE.modules.map((m) => <SceneCard key={m.title} {...m} />)}
+          <div className="grid3">
+            {BLUTUSCORE.modules.map((m) => (
+              <article key={m.title} className="card">
+                <div className="vis"><GlassObject kind={m.scene} /></div>
+                <div className="body"><h3>{m.title}</h3><p>{m.text}</p></div>
+              </article>
+            ))}
           </div>
-          <p className="caption">Product scenes show sample data.</p>
         </div>
       </section>
 
-      <section className="band dark">
+      <PartnerOrbit {...PARTNER_NETWORK} />
+
+      <section className="s">
         <div className="wrap">
-          <div className="reveal">
-            <p className="eyebrow">Architecture</p>
-            <h2>Modular by design</h2>
-            <p className="lead">A transfer enters through the partner APIs, passes routing, compliance, the ledger and AI ops, and leaves through the payout partner best suited to it.</p>
-          </div>
-          <ArchitectureFlow />
+          <p className="eyebrow">Architecture</p>
+          <h2>Modular by design</h2>
+          <p className="lead">A transfer enters through the partner APIs, passes quoting, compliance, routing and the ledger, and leaves through the payout partner best suited to it.</p>
+          <Circuit chips={CIRCUIT_MODULES} label="A transfer moving from the sender through quote and FX, compliance, routing and the ledger to the payout partner." />
+          <p className="caption">Illustrative flow.</p>
         </div>
       </section>
 
-      <section className="band dark">
-        <div className="wrap">
-          <div className="reveal">
-            <p className="eyebrow">{BLUTUSCORE.integration.eyebrow}</p>
-            <h2>{BLUTUSCORE.integration.title}</h2>
-            <p className="lead">{BLUTUSCORE.integration.lead}</p>
-          </div>
-          <CodeSync />
-          <p className="caption">Endpoint and payloads are illustrative.</p>
-          <div className="integ3 reveal">
-            {BLUTUSCORE.integration.items.map(([t, d]) => <div key={t}><h3>{t}</h3><p>{d}</p></div>)}
-          </div>
+      <Showcase />
+
+      <Developers eyebrow={integration.eyebrow} title={integration.title} lead={integration.lead}>
+        <div className="integ3 reveal">
+          {integration.items.map(([t, d]) => <div key={t}><h3>{t}</h3><p>{d}</p></div>)}
         </div>
-      </section>
+      </Developers>
 
       <CtaBand {...BLUTUSCORE.cta} />
     </Page>
