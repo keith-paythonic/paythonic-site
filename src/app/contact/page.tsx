@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/ContactForm";
-import { Page, PageHeader } from "@/components/Page";
+import { InnerHead } from "@/components/InnerHead";
+import { Page } from "@/components/Page";
 import { CONTACT, SITE } from "@/content/site";
 
 export const metadata: Metadata = { title: "Contact", description: CONTACT.lead };
@@ -8,15 +9,10 @@ export const metadata: Metadata = { title: "Contact", description: CONTACT.lead 
 export default function ContactPage() {
   return (
     <Page>
-      <PageHeader className="page-head">
-        <div className="wrap">
-          <p className="eyebrow">{CONTACT.eyebrow}</p>
-          <h1>{CONTACT.title}</h1>
-          <p className="lead">{CONTACT.lead}</p>
-        </div>
-      </PageHeader>
+      <InnerHead eyebrow={CONTACT.eyebrow} title={CONTACT.title} lead={CONTACT.lead} glass="plug" />
 
-      <section className="band">
+      {/* CT1: form on the left, contact details on the right, FAQ below. */}
+      <section className="s">
         <div className="wrap contact">
           <div className="panel">
             <h2>Send us a message</h2>
@@ -30,15 +26,12 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="band alt">
-        <div className="wrap faq">
+      <section className="s dk">
+        <div className="wrap">
           <p className="eyebrow">Frequently asked questions</p>
-          {CONTACT.faq.map(([q, a], i) => (
-            <details key={q} open={i === 0}>
-              <summary>{q}</summary>
-              <p>{a}</p>
-            </details>
-          ))}
+          <div className="faq">
+            {CONTACT.faq.map(([q, a], i) => <details key={q} open={i === 0}><summary>{q}</summary><p>{a}</p></details>)}
+          </div>
         </div>
       </section>
     </Page>

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { CtaBand } from "@/components/CtaBand";
-import { CheckIcon } from "@/components/Diagrams";
-import { LiveScene } from "@/components/LiveScene";
-import { Page, PageHeader } from "@/components/Page";
+import { GlassObject } from "@/components/Glass";
+import { CheckIcon } from "@/components/Icons";
+import { InnerHead } from "@/components/InnerHead";
+import { Page } from "@/components/Page";
 import { SOLUTIONS } from "@/content/site";
 
 export const metadata: Metadata = { title: "Solutions", description: SOLUTIONS.lead };
@@ -10,15 +11,9 @@ export const metadata: Metadata = { title: "Solutions", description: SOLUTIONS.l
 export default function SolutionsPage() {
   return (
     <Page>
-      <PageHeader className="page-head">
-        <div className="wrap">
-          <p className="eyebrow">{SOLUTIONS.eyebrow}</p>
-          <h1>{SOLUTIONS.title}</h1>
-          <p className="lead">{SOLUTIONS.lead}</p>
-        </div>
-      </PageHeader>
+      <InnerHead eyebrow={SOLUTIONS.eyebrow} title={SOLUTIONS.title} lead={SOLUTIONS.lead} glass="route" />
 
-      <section className="band">
+      <section className="s">
         <div className="wrap rows">
           {SOLUTIONS.audiences.map((a, i) => (
             <div key={a.title} className={`row2 reveal${i % 2 ? " rev" : ""}`}>
@@ -26,14 +21,11 @@ export default function SolutionsPage() {
                 <p className="spec">For</p>
                 <h2>{a.title}</h2>
                 <p className="lead">{a.text}</p>
-                <ul className="checks">
-                  {a.benefits.map((b) => <li key={b}><CheckIcon /><span>{b}</span></li>)}
-                </ul>
+                <ul className="checks">{a.benefits.map((b) => <li key={b}><CheckIcon /><span>{b}</span></li>)}</ul>
               </div>
-              <LiveScene kind={a.scene} />
+              <div className="rvis"><GlassObject kind={a.scene} /></div>
             </div>
           ))}
-          <p className="caption">Product scenes show sample data.</p>
         </div>
       </section>
 
