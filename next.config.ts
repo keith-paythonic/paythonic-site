@@ -9,14 +9,6 @@ const nextConfig: NextConfig = {
   // (the old site 404s on direct loads of every page except Home).
   trailingSlash: true,
   images: { unoptimized: true },
-  turbopack: {
-    rules: {
-      "*.css": {
-        loaders: ["@tailwindcss/turbopack"],
-        as: "*.css",
-      },
-    },
-  },
 };
 
 export default nextConfig;
