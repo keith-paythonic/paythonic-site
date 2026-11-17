@@ -9,6 +9,8 @@ export const SITE = {
     "DIFC-based fintech building BlutusCore: an AI-native remittance engine and partner integration platform for regulated cross-border payments.",
   ogDescription: "AI-native remittance infrastructure for regulated institutions.",
   status: "DIFC Registration in Progress · Dubai, UAE",
+  /** Footer copyright year. A literal on purpose: the site is static, so a computed year freezes at build time anyway. Bump it each January. */
+  copyrightYear: 2026,
   legal:
     "Paythonic AI Lab is currently in the process of company registration in the DIFC. It is a technology provider and does not provide regulated financial services or transmit customer funds unless explicitly licensed by the relevant authority.",
 };
@@ -172,4 +174,70 @@ export const CONTACT = {
     ["How long does integration take?", "Integration timelines vary by corridor and partners; BlutusCore is designed to reduce repeated integrations through standard APIs and workflows."],
     ["Can we adopt modules selectively?", "Yes. BlutusCore is modular and supports phased adoption. You can start with specific modules and expand as your needs grow."],
   ],
+};
+
+// ---------- Redesign (2026-11-18): copy for the new Home sections. Positioning lines, no figures or claims. ----------
+export const PROBLEM = {
+  eyebrow: "Why now",
+  title: "Cross-border payments still run on patchwork. BlutusCore turns it into one rail.",
+  lead: "Every new partner adds another point-to-point link, another format and another reconciliation file. BlutusCore replaces the tangle with one traceable path.",
+};
+
+export const BEFORE_AFTER = {
+  eyebrow: "Before and after",
+  title: "Remittance without the patchwork",
+  before: ["A separate build for every partner", "Manual sanctions and AML reviews", "Spreadsheet reconciliation", "No single audit trail"],
+  after: ["Integrate once via APIs & webhooks", "Configurable rules, human-in-the-loop escalation", "Double-entry ledger with reconciliation", "Every state change logged"],
+};
+
+export const STORY = {
+  eyebrow: "How BlutusCore moves money",
+  steps: [
+    { kind: "route", title: "Quote & route", text: "Intelligent partner selection based on cost, speed, and availability." },
+    { kind: "shield", title: "Screen & decide", text: "KYC/AML/sanctions checks with configurable rules and human-in-the-loop escalation." },
+    { kind: "chain", title: "Settle & reconcile", text: "Stablecoin and traditional rails, with reconciliation adapters." },
+    { kind: "ledger", title: "Record & prove", text: "A double-entry ledger and an audit trail for every state change." },
+  ] satisfies { kind: SceneKey; title: string; text: string }[],
+};
+
+export const SHOWCASE = {
+  eyebrow: "The platform",
+  title: "One engine, every step of the transfer",
+  tabs: [
+    { scene: "route", title: "Quote & route" },
+    { scene: "shield", title: "Screening" },
+    { scene: "ledger", title: "Ledger" },
+    { scene: "chain", title: "Settlement" },
+  ] satisfies { scene: SceneKey; title: string }[],
+};
+
+export const DEVELOPERS = {
+  eyebrow: "For developers",
+  title: "One API call starts the whole flow",
+  lead: "Standardized REST APIs and event-driven webhooks: send one request, get every lifecycle event back.",
+  flow: ["Your app", "BlutusCore", "Compliance", "Payout partner"],
+};
+
+export const ORBIT = {
+  inner: ["Banks", "Wallets", "Cash networks", "Stablecoin rails"],
+  outer: ["KYC providers", "Sanctions screening", "Payout partners", "Core banking"],
+};
+
+/** Circuit chips: Home walks the five steps, the BlutusCore page walks a transfer through the modules. */
+export const CIRCUIT_STEPS = HOME.steps.map(([t]) => t);
+export const CIRCUIT_MODULES = ["Sender", "Quote · FX", "Compliance", "Routing", "Ledger", "Payout"];
+
+/** The four promises in HOME.trust.lead, shown as pillars around the glass shield (design pick TR1). */
+export const TRUST_PILLARS: [string, string][] = [
+  ["Auditability", "Every transaction and system action is logged with timestamps, actors and state changes."],
+  ["Configurable controls", "Corridor-specific risk policies, limits and approval workflows."],
+  ["Human-in-the-loop", "Exceptions reach operators when a decision needs oversight."],
+  ["Traceability", "One trail for every transfer, across partners and jurisdictions."],
+];
+
+/** BlutusCore page: the integrations orbit (design picks OB1 glass-sphere hub, OP1 own section). */
+export const PARTNER_NETWORK = {
+  eyebrow: "Partner network",
+  title: "One hub for every partner",
+  lead: "Banks, wallets, cash networks, stablecoin rails and compliance providers connect through one integration layer, which reduces repeated partner builds as you add corridors.",
 };
