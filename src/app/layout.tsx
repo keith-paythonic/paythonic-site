@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   // No og:url here: each page would claim to be the homepage when shared (review finding 2).
   openGraph: { title: SITE.name, description: SITE.ogDescription, type: "website", siteName: SITE.name },
   twitter: { card: "summary_large_image", site: "@paythonic", title: `${SITE.name} | BlutusCore`, description: SITE.ogDescription },
-  icons: { icon: "/favicon.svg" },
+  icons: { icon: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/favicon.svg` },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
