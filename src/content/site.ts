@@ -38,7 +38,7 @@ export const HOME = {
     lead: "BlutusCore orchestrates the remittance lifecycle (routing, payout partner integration, settlement rails, ledger traceability, and compliance workflows) through a modular, API-first platform.",
   },
   capabilities: [
-    { scene: "route", title: "Global Remittance Orchestration", text: "Multi-corridor routing, lifecycle state management, and intelligent partner selection." },
+    { scene: "route", title: "Global Remittance Orchestration", text: "Multi-corridor routing, lifecycle state management, and rule-based partner selection with automatic fallback." },
     { scene: "plug", title: "Partner Integration Platform", text: "Unified partner APIs, streamlined onboarding, and continuous SLA monitoring." },
     { scene: "radar", title: "Agentic AI for Ops & Risk", text: "Anomaly detection, fraud signals, and automated exception handling workflows." },
     { scene: "chain", title: "Blockchain & Stablecoin Settlement", text: "Support for stablecoin settlement rails with built-in reconciliation adapters." },
@@ -72,7 +72,7 @@ export const BLUTUSCORE = {
   subtitle: "AI-Native Remittance Engine & Partner Integration Platform",
   lead: "BlutusCore is a modular, API-first platform designed to power cross-border money movement for regulated institutions, combining orchestration, automation, settlement rails, and audit-ready ledger traceability.",
   modules: [
-    { scene: "route", title: "Orchestration", text: "Multi-corridor routing, lifecycle state management, and intelligent partner selection based on cost, speed, and availability." },
+    { scene: "route", title: "Orchestration", text: "Multi-corridor routing, lifecycle state management, and rule-based partner selection by corridor, payout method, amount limits, partner health and capacity, with automatic fallback." },
     { scene: "radar", title: "AI Ops & Risk", text: "Anomaly detection, fraud signals, exception handling workflows, and predictive routing optimization." },
     { scene: "chain", title: "Settlement Rails", text: "Stablecoin settlement options (e.g., USDC/USDT) alongside traditional rails, with reconciliation adapters." },
     { scene: "ledger", title: "Ledger", text: "Double-entry ledger with balances, journals, comprehensive reconciliation support, and audit trails." },
@@ -86,7 +86,7 @@ export const BLUTUSCORE = {
     items: [
       ["RESTful APIs", "Well-documented, versioned APIs for all platform capabilities."],
       ["Event-Driven Webhooks", "Real-time notifications for transaction lifecycle events."],
-      ["SDK Support", "Client libraries for faster integration in popular languages."],
+      ["OpenAPI Specification", "A machine-readable spec for every API, ready to import into your tools or generate client libraries in your language."],
     ],
   },
   cta: { title: "See BlutusCore in action", lead: "Schedule a walkthrough with our team to explore how BlutusCore can power your cross-border operations." },
@@ -120,7 +120,7 @@ export const COMPLIANCE = {
     title: "Built for regulator expectations",
     lead: "Every aspect of BlutusCore is designed with compliance officers and regulators in mind.",
     items: [
-      { scene: "ledger", title: "Transparent Audit Trails", text: "Every transaction and system action is logged with timestamps, actors, and state changes for complete traceability." },
+      { scene: "ledger", title: "Transparent Audit Trails", text: "Every transaction and system action is logged with timestamps, actors and state changes in a tamper-evident trail: hash-chained, with signed checkpoints." },
       { scene: "shield", title: "Configurable Risk Controls", text: "Define and enforce corridor-specific risk policies, limits, and approval workflows based on your regulatory requirements." },
       { scene: "radar", title: "Human-in-the-Loop Escalation", text: "Automated workflows surface exceptions to human operators, ensuring critical decisions receive appropriate oversight." },
       { scene: "plug", title: "Secure Integration Patterns", text: "Least-privilege access controls, encrypted communications, and secure credential management by design." },
@@ -134,7 +134,7 @@ export const COMPLIANCE = {
     items: [
       ["KYC Integration", "Connect to your preferred identity verification providers with standardized data flows and fallback handling."],
       ["AML Monitoring", "Integration points for transaction monitoring services with configurable escalation rules."],
-      ["Sanctions Screening", "Pre-built connectors for major sanctions screening providers with real-time and batch processing support."],
+      ["Sanctions Screening", "Adapters for third-party sanctions and PEP screening, with real-time checks and a final re-screen before payout."],
       ["Policy Configuration", "Define policies and escalation flows per partner and corridor to match your regulatory obligations."],
     ],
   },
