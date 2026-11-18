@@ -169,6 +169,9 @@ function Spokes({ angles, r }: { angles: number[]; r: number }) {
   );
 }
 
+const INNER_A = [0, 120, 240];
+const OUTER_A = [45, 135, 225, 315];
+
 /** OB1 + OP1 (BlutusCore page): partner types circle a glass-sphere hub carrying the living logo ("integrate once"). */
 export function PartnerOrbit({ title, eyebrow, lead }: { title: string; eyebrow: string; lead: string }) {
   return (
@@ -178,8 +181,10 @@ export function PartnerOrbit({ title, eyebrow, lead }: { title: string; eyebrow:
         <h2>{title}</h2>
         <p className="lead">{lead}</p>
         <div className="orbit" aria-hidden="true">
-          <div className="ring outer"><Spokes angles={[45, 135, 225, 315]} r={280} />{ORBIT.outer.map((t, i) => <span key={t} style={css({ "--a": `${i * 90 + 45}deg` })}><em>{t}</em></span>)}</div>
-          <div className="ring inner"><Spokes angles={[0, 90, 180, 270]} r={180} />{ORBIT.inner.map((t, i) => <span key={t} style={css({ "--a": `${i * 90}deg` })}><em>{t}</em></span>)}</div>
+          {/* Labels alternate across both rings: inner every 120deg, outer every 90deg offset by 45deg, so no two line up.
+              Both rings turn together (globals.css .ring), so the spacing holds as they spin. */}
+          <div className="ring outer"><Spokes angles={OUTER_A} r={300} />{ORBIT.outer.map((t, i) => <span key={t} style={css({ "--a": `${OUTER_A[i]}deg` })}><em>{t}</em></span>)}</div>
+          <div className="ring inner"><Spokes angles={INNER_A} r={180} />{ORBIT.inner.map((t, i) => <span key={t} style={css({ "--a": `${INNER_A[i]}deg` })}><em>{t}</em></span>)}</div>
           <div className="hub">
             <svg viewBox="0 0 200 200" className="hub-glass">
               <ellipse cx="100" cy="186" rx="60" ry="8" fill="url(#gl-shadow)" />
@@ -191,6 +196,9 @@ export function PartnerOrbit({ title, eyebrow, lead }: { title: string; eyebrow:
             <b className="hub-label">BlutusCore</b>
           </div>
         </div>
+        {/* The same partner types as a list: screen-reader text on desktop (the orbit is decorative), visible chips on
+            phones, where the rings are too close for spinning labels. */}
+        <ul className="orbit-chips">{[...ORBIT.outer, ...ORBIT.inner].map((t) => <li key={t}>{t}</li>)}</ul>
         <p className="caption">Partner types BlutusCore is designed to connect.</p>
       </div>
     </section>

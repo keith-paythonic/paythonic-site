@@ -95,13 +95,13 @@ export const BLUTUSCORE = {
 export const SOLUTIONS = {
   eyebrow: "Solutions",
   title: "Solutions for Modern Cross-Border Payments",
-  lead: "Whether you're a licensed remittance operator, a bank expanding internationally, or a fintech enabling global payouts, BlutusCore adapts to your operational model.",
+  lead: "Whether you're a licensed remittance company, a bank expanding internationally, or a fintech enabling global payouts, BlutusCore adapts to your operational model.",
   audiences: [
-    { scene: "route", title: "MSBs / Remittance Operators", text: "Launch corridors faster, standardize partner integrations, and automate exception handling.",
+    { scene: "route", icon: "plane", title: "Remittance Companies (MSBs)", text: "Launch corridors faster, standardize partner integrations, and automate exception handling.",
       benefits: ["Reduce time-to-market for new corridors", "Standardize partner onboarding workflows", "Automate exception handling and retries", "Maintain complete transaction traceability"] },
-    { scene: "shield", title: "Banks & Neo-banks", text: "Expand cross-border offerings with controlled risk policies, auditability, and modular adoption.",
+    { scene: "shield", icon: "columns", title: "Banks & Neo-banks", text: "Expand cross-border offerings with controlled risk policies, auditability, and modular adoption.",
       benefits: ["Modular adoption path for existing infrastructure", "Enterprise-grade audit and compliance controls", "Configurable risk policies per corridor", "Integration with existing core banking systems"] },
-    { scene: "chain", title: "Wallets & Fintech Platforms", text: "Enable global payouts to banks, wallets, and cash networks using unified integrations.",
+    { scene: "chain", icon: "wallet", title: "Wallets & Fintech Platforms", text: "Enable global payouts to banks, wallets, and cash networks using unified integrations.",
       benefits: ["Single integration for multiple payout methods", "Real-time payout status and notifications", "Support for wallet-to-wallet transfers", "Cash pickup network integrations"] },
     { scene: "plug", title: "Payout Partners", text: "Connect through consistent technical and operational standards with clear SLAs and monitoring.",
       benefits: ["Standardized technical integration specifications", "Clear SLA definitions and monitoring", "Certification workflows for quality assurance", "Unified reporting and reconciliation"] },
@@ -224,9 +224,13 @@ export const DEVELOPERS = {
   flow: ["Your app", "BlutusCore", "Compliance", "Payout partner"],
 };
 
+/** Partner types, each once (a bank can send and pay out, so no sending/payout split). Service providers we plug in
+ *  (KYC, sanctions screening, stablecoin rails) are not partners and stay out of the orbit. Long labels sit on the
+ *  outer ring, which has more room; .orbit sizes in globals.css are tuned so none overlap or leave a phone screen. */
 export const ORBIT = {
-  inner: ["Banks", "Wallets", "Cash networks", "Stablecoin rails"],
-  outer: ["KYC providers", "Sanctions screening", "Payout partners", "Core banking"],
+  // Order matters: inner slots 120 and 240 sit 15deg from outer slots 135 and 225, so the shortest labels go there.
+  inner: ["Digital wallets", "Banks", "Neo-banks"],
+  outer: ["Remittance companies", "Fintech platforms", "Cash pickup networks", "Mobile money operators"],
 };
 
 /** Circuit chips: Home walks the five steps, the BlutusCore page walks a transfer through the modules. */
@@ -245,5 +249,5 @@ export const TRUST_PILLARS: [string, string][] = [
 export const PARTNER_NETWORK = {
   eyebrow: "Partner network",
   title: "One hub for every partner",
-  lead: "Banks, wallets, cash networks, stablecoin rails and compliance providers connect through one integration layer, which reduces repeated partner builds as you add corridors.",
+  lead: "Remittance companies, banks, wallets, mobile money operators and cash pickup networks connect through one integration layer, which reduces repeated partner builds as you add corridors.",
 };
