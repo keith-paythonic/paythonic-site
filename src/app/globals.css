@@ -295,16 +295,30 @@ html[data-logo-play] .living-logo .mark path:last-child { animation: lg-drop .6s
 .cir-list[data-n="6"] li:nth-child(6) { animation: c6li5 9s linear infinite both; }
 /* @end-circuit-keyframes */
 
-/* ---------- product showcase (U1, Equiem): ruled rows + the matching screen in a framed device ---------- */
-.show { display: grid; grid-template-columns: 380px 1fr; gap: 40px; align-items: stretch; margin-top: 34px; }
-.show-row { display: flex; gap: 16px; align-items: baseline; padding: 22px 18px; border-top: 1px solid var(--sl); font-size: 22px; color: var(--sm); animation: rowc 12s calc(var(--i) * 3s) infinite; }
-.show-row:last-child { border-bottom: 1px solid var(--sl); } .show-row span { font-size: 13px; color: var(--sa); }
-@keyframes rowc { 0%, 23% { color: var(--st); background: color-mix(in srgb, var(--sa) 10%, transparent); box-shadow: inset 3px 0 var(--sa); } 26%, 100% { color: var(--sm); } }
-.show-stage { display: grid; place-items: center; padding: 40px; background: radial-gradient(ellipse at 50% 40%, color-mix(in srgb, var(--brand) 30%, transparent), transparent 70%), color-mix(in srgb, var(--sa) 6%, transparent); }
-.device { position: relative; width: min(460px, 100%); height: 300px; border: 10px solid #0e1733; border-radius: 18px; background: var(--surface); box-shadow: 0 30px 70px -30px rgba(0,0,0,.8); }
-.device .screen { position: absolute; inset: 0; display: grid; place-items: center; padding: 20px; opacity: 0; animation: cyc 12s calc(var(--i) * 3s) infinite; }
-.device .screen:first-child { opacity: 1; }
-@keyframes cyc { 0%, 23% { opacity: 1; } 26%, 100% { opacity: 0; } }
+/* ---------- The Platform (PL3, BlutusCore page): pinned; one transfer moves along a five-step rail ---------- */
+.pl-rail { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; position: relative; padding-top: 30px; margin: 10px 0 0; }
+.pl-rail::before { content: ""; position: absolute; left: 0; right: 0; top: 7px; height: 2px; background: var(--sl); }
+.pl-rail li { position: relative; font: 600 13px var(--font-plex-mono); color: var(--st); }
+.pl-rail i { position: absolute; top: -30px; left: 0; width: 16px; height: 16px; border-radius: 50%; background: var(--deep-brand); border: 2px solid var(--deep-brand); }
+.pl-card { margin-top: 22px; display: grid; gap: 1px; }
+.pl-state { display: grid; grid-template-columns: 1fr minmax(0, 380px); gap: 40px; align-items: center; padding: 30px 36px; }
+.pl-state h3 { font-size: 30px; margin: 6px 0; } .pl-state p:not(.spec) { color: var(--sm); font-size: 17px; margin: 0; } .pl-state .scene { min-height: 0; padding: 0; }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .pl-pin { height: 260vh; view-timeline-name: --plat; }
+    .pl-stage { position: sticky; top: var(--nav-h); min-height: calc(100vh - var(--nav-h)); display: grid; align-content: center; }
+    .pl-rail li { color: var(--sm); animation: pl-on linear both; animation-timeline: --plat; animation-range: contain calc(var(--i) * 18%) contain calc(var(--i) * 18% + 4%); }
+    .pl-rail i { background: var(--sb); border-color: var(--sl); animation: pl-dot linear both; animation-timeline: --plat; animation-range: contain calc(var(--i) * 18%) contain calc(var(--i) * 18% + 4%); }
+    .pl-card { position: relative; height: 340px; display: block; }
+    .pl-state { position: absolute; inset: 0; opacity: 0; animation: pl-state linear both; animation-timeline: --plat; animation-range: contain calc(var(--i) * 18%) contain calc(var(--i) * 18% + 18%); }
+    .pl-state:first-child { animation-name: pl-state-first; } .pl-state:last-child { animation-name: pl-state-last; }
+  }
+}
+@keyframes pl-on { to { color: var(--st); } }
+@keyframes pl-dot { to { background: var(--deep-brand); border-color: var(--deep-brand); box-shadow: 0 0 14px var(--glow); } }
+@keyframes pl-state { 0% { opacity: 0; transform: translateX(30px); } 20%, 80% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateX(-30px); } }
+@keyframes pl-state-first { 0%, 80% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateX(-30px); } }
+@keyframes pl-state-last { 0% { opacity: 0; transform: translateX(30px); } 20%, 100% { opacity: 1; transform: none; } }
 
 /* ---------- developers (V1): request lines light up while the flow they trigger draws ---------- */
 .dev { display: grid; grid-template-columns: 1.4fr 1fr; gap: 28px; align-items: center; margin-top: 28px; }

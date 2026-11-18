@@ -25,6 +25,8 @@ export const NAV_LINKS = [
 ] as const;
 
 export type SceneKey = "route" | "plug" | "radar" | "chain" | "ledger" | "shield";
+/** Every glass icon: the six scene objects plus the ones added so no icon repeats on a page (components/glass-markup.ts). */
+export type IconKey = SceneKey | "checklist" | "exchange" | "magnifier" | "merge" | "docseal" | "compass" | "scales" | "envelope" | "plane" | "columns" | "wallet" | "processor";
 
 export const HOME = {
   title: "AI-Native Infrastructure for Global Remittance",
@@ -41,8 +43,9 @@ export const HOME = {
     { scene: "radar", title: "Agentic AI for Ops & Risk", text: "Anomaly detection, fraud signals, and automated exception handling workflows." },
     { scene: "chain", title: "Blockchain & Stablecoin Settlement", text: "Support for stablecoin settlement rails with built-in reconciliation adapters." },
     { scene: "ledger", title: "Double-Entry Ledger", text: "Complete ledger with balances, journals, and comprehensive reconciliation support." },
-    { scene: "shield", title: "Compliance-by-Design Controls", text: "KYC/AML/sanctions integration points with configurable rules and escalation." },
-  ] satisfies { scene: SceneKey; title: string; text: string }[],
+    // Checklist, not the shield: the big shield belongs to the Compliance-first section further down Home.
+    { scene: "shield", icon: "checklist", title: "Compliance-by-Design Controls", text: "KYC/AML/sanctions integration points with configurable rules and escalation." },
+  ] satisfies { scene: SceneKey; icon?: IconKey; title: string; text: string }[],
   steps: [
     ["Integrate", "Connect once via APIs & webhooks"],
     ["Configure", "Set corridors, partners, and pricing rules"],
@@ -104,7 +107,7 @@ export const SOLUTIONS = {
       benefits: ["Standardized technical integration specifications", "Clear SLA definitions and monitoring", "Certification workflows for quality assurance", "Unified reporting and reconciliation"] },
     { scene: "radar", title: "Operations & Compliance Teams", text: "Improve traceability, reduce manual ops, and establish consistent controls across corridors.",
       benefits: ["Centralized exception management dashboard", "Configurable escalation workflows", "Real-time compliance monitoring", "Comprehensive audit trail access"] },
-  ] satisfies { scene: SceneKey; title: string; text: string; benefits: string[] }[],
+  ] satisfies { scene: SceneKey; icon?: IconKey; title: string; text: string; benefits: string[] }[],
   cta: { title: "Which solution fits your needs?", lead: "Schedule a call to discuss your specific requirements and explore how BlutusCore can help." },
 };
 
@@ -193,22 +196,25 @@ export const BEFORE_AFTER = {
 export const STORY = {
   eyebrow: "How BlutusCore moves money",
   steps: [
-    { kind: "route", title: "Quote & route", text: "Intelligent partner selection based on cost, speed, and availability." },
-    { kind: "shield", title: "Screen & decide", text: "KYC/AML/sanctions checks with configurable rules and human-in-the-loop escalation." },
-    { kind: "chain", title: "Settle & reconcile", text: "Stablecoin and traditional rails, with reconciliation adapters." },
-    { kind: "ledger", title: "Record & prove", text: "A double-entry ledger and an audit trail for every state change." },
-  ] satisfies { kind: SceneKey; title: string; text: string }[],
+    { kind: "exchange", title: "Quote & route", text: "Route selection by corridor, limits and partner health, with automatic fallback." },
+    { kind: "magnifier", title: "Screen & decide", text: "KYC/AML/sanctions checks with configurable rules and human-in-the-loop escalation." },
+    { kind: "merge", title: "Settle & reconcile", text: "Stablecoin and traditional rails, with reconciliation adapters." },
+    { kind: "docseal", title: "Record & prove", text: "A double-entry ledger and an audit trail for every state change." },
+  ] satisfies { kind: IconKey; title: string; text: string }[],
 };
 
-export const SHOWCASE = {
+/** BlutusCore page, The Platform (design pick PL3): one sample transfer moving through five steps. Sample data. */
+export const PLATFORM = {
   eyebrow: "The platform",
   title: "One engine, every step of the transfer",
-  tabs: [
-    { scene: "route", title: "Quote & route" },
-    { scene: "shield", title: "Screening" },
-    { scene: "ledger", title: "Ledger" },
-    { scene: "chain", title: "Settlement" },
-  ] satisfies { scene: SceneKey; title: string }[],
+  transfer: "TR_9F21",
+  steps: [
+    { scene: "route", title: "Quote locked", text: "AED 6,850 → PHP 104,210" },
+    { scene: "shield", title: "Screening passed", text: "KYC · AML · sanctions" },
+    { scene: "plug", title: "Routed", text: "Wallet PH-2 selected · 412 ms" },
+    { scene: "ledger", title: "Journal posted", text: "4 entries · Σ 0.00" },
+    { scene: "chain", title: "Settled", text: "Stablecoin rail · reconciled" },
+  ] satisfies { scene: SceneKey; title: string; text: string }[],
 };
 
 export const DEVELOPERS = {

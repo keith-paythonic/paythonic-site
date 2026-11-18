@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "Contact", description: CONTACT.lead 
 export default function ContactPage() {
   return (
     <Page>
-      <InnerHead eyebrow={CONTACT.eyebrow} title={CONTACT.title} lead={CONTACT.lead} glass="plug" />
+      <InnerHead eyebrow={CONTACT.eyebrow} title={CONTACT.title} lead={CONTACT.lead} glass="envelope" />
 
       {/* CT1: form on the left, contact details on the right, FAQ below. */}
       <section className="s">

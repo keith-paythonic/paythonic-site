@@ -1,4 +1,5 @@
-import type { SceneKey } from "@/content/site";
+import { GLASS_MARKUP, type MarkupIcon } from "@/components/glass-markup";
+import type { IconKey, SceneKey } from "@/content/site";
 
 // Glassy monochrome 3D objects (design pick I2), drawn in SVG. Colours come from --g-hi/--g-mid/--g-lo, so they follow
 // the theme. The gradients are defined once in <GlassDefs/> (layout.tsx) and shared by every object on the page.
@@ -15,8 +16,9 @@ const SHAPES: Record<SceneKey, React.ReactNode> = {
 };
 
 /** Decorative: the heading beside it carries the meaning. */
-export function GlassObject({ kind, className = "" }: { kind: SceneKey; className?: string }) {
-  return <svg className={`glass ${className}`} viewBox="0 0 200 200" aria-hidden="true" focusable="false">{SHAPES[kind]}</svg>;
+export function GlassObject({ kind, className = "" }: { kind: IconKey; className?: string }) {
+  if (kind in SHAPES) return <svg className={`glass ${className}`} viewBox="0 0 200 200" aria-hidden="true" focusable="false">{SHAPES[kind as SceneKey]}</svg>;
+  return <svg className={`glass ${className}`} viewBox="0 0 200 200" aria-hidden="true" focusable="false" dangerouslySetInnerHTML={{ __html: GLASS_MARKUP[kind as MarkupIcon] }} />;
 }
 
 /** Shared gradients for every GlassObject. Rendered once, zero-size but not display:none (hidden defs break gradients in some browsers). */

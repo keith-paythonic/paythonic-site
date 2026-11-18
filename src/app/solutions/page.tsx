@@ -11,7 +11,7 @@ export const metadata: Metadata = { title: "Solutions", description: SOLUTIONS.l
 export default function SolutionsPage() {
   return (
     <Page>
-      <InnerHead eyebrow={SOLUTIONS.eyebrow} title={SOLUTIONS.title} lead={SOLUTIONS.lead} glass="route" />
+      <InnerHead eyebrow={SOLUTIONS.eyebrow} title={SOLUTIONS.title} lead={SOLUTIONS.lead} glass="compass" />
 
       <section className="s">
         <div className="wrap rows">
@@ -23,7 +23,7 @@ export default function SolutionsPage() {
                 <p className="lead">{a.text}</p>
                 <ul className="checks">{a.benefits.map((b) => <li key={b}><CheckIcon /><span>{b}</span></li>)}</ul>
               </div>
-              <div className="rvis"><GlassObject kind={a.scene} /></div>
+              <div className="rvis"><GlassObject kind={a.icon ?? a.scene} /></div>
             </div>
           ))}
         </div>

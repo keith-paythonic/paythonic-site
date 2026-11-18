@@ -34,9 +34,11 @@ export default function Home() {
         {/* The corridor line starts at the first section after the hero and runs to the end of the page. */}
         <div className="page-flow">
           <Thread />
+          {/* HO1: the problem and its before/after first, then what BlutusCore does, how money moves, how it works. */}
           <Problem />
+          <BeforeAfter />
 
-        <section className="s">
+        <section className="s dk">
           <div className="wrap">
             <div className="reveal">
               <p className="eyebrow">{HOME.what.eyebrow}</p>
@@ -46,7 +48,7 @@ export default function Home() {
             <div className="grid3">
               {HOME.capabilities.map((c) => (
                 <article key={c.title} className="card">
-                  <div className="vis"><GlassObject kind={c.scene} /></div>
+                  <div className="vis"><GlassObject kind={c.icon ?? c.scene} /></div>
                   <div className="body"><h3>{c.title}</h3><p>{c.text}</p></div>
                 </article>
               ))}
@@ -54,7 +56,6 @@ export default function Home() {
           </div>
         </section>
 
-        <BeforeAfter />
         <Story />
 
         <section className="s dk">

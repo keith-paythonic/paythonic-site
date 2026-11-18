@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Circuit } from "@/components/Circuit";
 import { CtaBand } from "@/components/CtaBand";
 import { GlassObject } from "@/components/Glass";
-import { Developers, PartnerOrbit, Showcase } from "@/components/Sections";
-import { Page, PageHeader } from "@/components/Page";
+import { Developers, PartnerOrbit, PlatformTimeline } from "@/components/Sections";
+import { InnerHead } from "@/components/InnerHead";
+import { Page } from "@/components/Page";
 import { BLUTUSCORE, CIRCUIT_MODULES, PARTNER_NETWORK } from "@/content/site";
 
 export const metadata: Metadata = { title: "BlutusCore", description: BLUTUSCORE.lead };
@@ -12,14 +13,7 @@ export default function BlutusCorePage() {
   const { integration } = BLUTUSCORE;
   return (
     <Page>
-      <PageHeader className="hero page-head">
-        <div className="wrap">
-          <p className="eyebrow">{BLUTUSCORE.eyebrow}</p>
-          <h1 className="metal">{BLUTUSCORE.title}</h1>
-          <p className="subtitle">{BLUTUSCORE.subtitle}</p>
-          <p className="lead">{BLUTUSCORE.lead}</p>
-        </div>
-      </PageHeader>
+      <InnerHead eyebrow={BLUTUSCORE.eyebrow} title={BLUTUSCORE.title} subtitle={BLUTUSCORE.subtitle} lead={BLUTUSCORE.lead} glass="processor" />
 
       <section className="s">
         <div className="wrap">
@@ -50,7 +44,7 @@ export default function BlutusCorePage() {
         </div>
       </section>
 
-      <Showcase />
+      <PlatformTimeline />
 
       <Developers eyebrow={integration.eyebrow} title={integration.title} lead={integration.lead}>
         <div className="integ3 reveal">

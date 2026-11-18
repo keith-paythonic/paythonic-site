@@ -3,9 +3,8 @@
 import { GlassObject } from "@/components/Glass";
 import { LiveScene } from "@/components/LiveScene";
 import { LivingMark } from "@/components/PaythonicMark";
-import { BEFORE_AFTER, DEVELOPERS, ORBIT, PROBLEM, SHOWCASE, STORY, TRUST_PILLARS } from "@/content/site";
+import { BEFORE_AFTER, DEVELOPERS, ORBIT, PLATFORM, PROBLEM, STORY, TRUST_PILLARS } from "@/content/site";
 
-const THREAD_D = "M97 0 C 97 160 99 240 96 330 S 98 520 97 620 S 95 820 97 990";
 const TANGLE = "M0 40 C 120 160 200 -40 320 120 S 520 20 640 140 S 820 0 900 90";
 const css = (v: Record<string, string | number>) => v as React.CSSProperties;
 
@@ -31,7 +30,7 @@ export function Problem() {
 /** BA4: pinned; the four cards arrive showing the old way, then flip to the BlutusCore way one by one as you scroll. */
 export function BeforeAfter() {
   return (
-    <section className="s dk">
+    <section className="s">
       <div className="flip-pin">
         <div className="wrap flip-stage">
           <p className="eyebrow">{BEFORE_AFTER.eyebrow}</p>
@@ -72,20 +71,32 @@ export function Story() {
   );
 }
 
-/** U1: ruled rows on the left; the matching product screen cycles in a framed device. */
-export function Showcase() {
+/** PL3: pinned; as you scroll, one sample transfer moves along a rail of five steps and its card changes to match.
+ *  Without scroll-driven animation support (or with reduced motion) the five steps show as a plain list. */
+export function PlatformTimeline() {
   return (
     <section className="s dk">
-      <div className="wrap">
-        <p className="eyebrow">{SHOWCASE.eyebrow}</p>
-        <h2>{SHOWCASE.title}</h2>
-        <div className="show">
-          <div>{SHOWCASE.tabs.map((t, i) => <div key={t.title} className="show-row" style={css({ "--i": i })}><span className="mono">0{i + 1}</span><b>{t.title}</b></div>)}</div>
-          <div className="show-stage" aria-hidden="true">
-            <div className="device">{SHOWCASE.tabs.map((t, i) => <div key={t.title} className="screen" style={css({ "--i": i })}><LiveScene kind={t.scene} /></div>)}</div>
+      <div className="pl-pin">
+        <div className="wrap pl-stage">
+          <div>
+            <p className="eyebrow">{PLATFORM.eyebrow}</p>
+            <h2>{PLATFORM.title}</h2>
           </div>
+          <ol className="pl-rail" aria-hidden="true">{PLATFORM.steps.map((st, i) => <li key={st.title} style={css({ "--i": i })}><i />{st.title}</li>)}</ol>
+          <div className="pl-card card">
+            {PLATFORM.steps.map((st, i) => (
+              <div key={st.title} className="pl-state" style={css({ "--i": i })}>
+                <div>
+                  <p className="spec">Transfer {PLATFORM.transfer} · step {i + 1} of {PLATFORM.steps.length}</p>
+                  <h3>{st.title}</h3>
+                  <p>{st.text}</p>
+                </div>
+                <LiveScene kind={st.scene} />
+              </div>
+            ))}
+          </div>
+          <p className="caption">Sample transfer and data.</p>
         </div>
-        <p className="caption">Product scenes show sample data.</p>
       </div>
     </section>
   );
@@ -176,7 +187,7 @@ export function PartnerOrbit({ title, eyebrow, lead }: { title: string; eyebrow:
               <ellipse cx="100" cy="95" rx="98" ry="26" fill="none" stroke="url(#gl-rim)" strokeWidth="4" transform="rotate(-16 100 95)" />
               <ellipse cx="74" cy="56" rx="26" ry="13" fill="#fff" opacity=".35" transform="rotate(-30 74 56)" />
             </svg>
-            <span className="hub-mark"><LivingMark size={46} /></span>
+            <span className="hub-mark"><LivingMark size={64} /></span>
             <b className="hub-label">BlutusCore</b>
           </div>
         </div>

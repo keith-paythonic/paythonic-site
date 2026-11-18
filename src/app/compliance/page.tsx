@@ -15,7 +15,7 @@ export default function CompliancePage() {
   const { principles, integrations, security } = COMPLIANCE;
   return (
     <Page>
-      <InnerHead eyebrow={COMPLIANCE.eyebrow} title={COMPLIANCE.title} lead={COMPLIANCE.lead} glass="shield" />
+      <InnerHead eyebrow={COMPLIANCE.eyebrow} title={COMPLIANCE.title} lead={COMPLIANCE.lead} glass="scales" />
 
       <section className="s">
         <div className="wrap">
