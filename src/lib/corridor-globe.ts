@@ -1,8 +1,6 @@
-// Copied unchanged from BlutusCore src/portals/dev-portal/lib/corridor-globe.ts (portal sign-in globe), only import paths changed.
-// Keep it in step with the portal so the website and the logins draw the same globe.
 /**
- * The sign-in globe's drawing engine (Paythonic design 4.26, 6.4), on a 2D
- * canvas. Ported from the approved design files (blutuscore-portals
+ * The hero globe's drawing engine (Paythonic design 4.26, 6.4), on a 2D
+ * canvas. Ported from the approved design files (paythonic design
  * r4/globe.js, the "Open" globe in the "Horizon" view).
  *
  * Intro, once per mount: the whole Earth turns, then the view flies in over
@@ -17,7 +15,7 @@ import { LAND, LAND_SEA } from '@/lib/globe-land';
 import { GLOBE_CITIES, GLOBE_HUB, GLOBE_ROUTES } from '@/lib/globe-corridors';
 
 export interface GlobeColours {
-  /** Corridors and city markers (the portal's tone). */
+  /** Corridors and city markers (the brand tone). */
   tone: string;
   /** Lines and labels, as "r,g,b". */
   fg: string;

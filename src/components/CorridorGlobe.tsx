@@ -28,7 +28,7 @@ function themeColours(): GlobeColours {
   };
 }
 
-/** The same globe and corridors as the portal logins (Bangkok hub to Yangon, Phnom Penh, Ho Chi Minh City,
+/** The corridor globe (Bangkok hub to Yangon, Phnom Penh, Ho Chi Minh City,
  *  Manila). Decorative: an illustration of the network, not live data. Redraws when the theme or layout changes. */
 export function CorridorGlobe() {
   const host = useRef<HTMLDivElement>(null);

@@ -1,6 +1,6 @@
 /* ============================================================================================
    Paythonic design system, redesign (2026-11-18). Locked through the design-options pickers:
-   round 1 D3 F3 H1 I2 L3 C4 (Midnight blue, Plex + italic serif accent, portal globe, glass objects,
+   round 1 D3 F3 H1 I2 L3 C4 (Midnight blue, Plex + italic serif accent, corridor globe, glass objects,
    logo cut corners, melting chapters) · round 2 A3 W1 X1 G1 P4 Q2 B1 S1 U1 N3 V1 R2 Z1 T4 E4 K1 M1.
    DARK is the default; [data-theme="light"] is set by the nav toggle (remembered per browser).
    ============================================================================================ */
@@ -150,7 +150,7 @@ html[data-logo-play] .living-logo .mark path:last-child { animation: lg-drop .6s
 @keyframes lg-drop { from { transform: translateY(-300px); opacity: 0; } to { transform: none; opacity: 1; } } @keyframes lg-drop-r { from { transform: translateY(-300px); opacity: 0; } to { transform: none; opacity: 1; } }
 @keyframes lg-idle { 0%, 86%, 100% { translate: 0 0; } 90% { translate: 0 -140px; } 95% { translate: 0 22px; } 98% { translate: 0 -6px; } }
 
-/* ---------- hero (H1 portal globe, G1 globe only) ---------- */
+/* ---------- hero (H1 corridor globe, G1 globe only) ---------- */
 .hero { --st: var(--deep-text); --sm: var(--deep-muted); --sa: var(--deep-brand); --sl: var(--deep-line); position: relative; overflow: hidden; color: var(--deep-text);
   background: var(--hero-tex), linear-gradient(115deg, var(--deep), var(--deep-2) 55%, var(--deep)); min-height: 680px; display: flex; align-items: center; border-bottom: 1px solid var(--deep-line); }
 .hero .wrap { width: 100%; }

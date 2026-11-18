@@ -19,5 +19,5 @@ npm run lint && npm run typecheck
 
 - Copy: `src/content/site.ts` (from the live site; keep claims factual, sample data labelled).
 - Design system: `src/app/globals.css`.
-- Hero globe: `src/lib/corridor-globe.ts`, copied from the BlutusCore portal sign-in globe; keep the two in step.
+- Hero globe: `src/lib/corridor-globe.ts` (canvas globe with the example corridors).
 - Contact form: opens the visitor's email app (mailto). A server endpoint comes later, with any keys kept server-side.
