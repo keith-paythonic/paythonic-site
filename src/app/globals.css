@@ -377,22 +377,27 @@ html[data-logo-play] .living-logo .mark path:last-child { animation: lg-drop .6s
 .arc { position: absolute; left: -15%; right: -15%; bottom: -360px; height: 480px; border-radius: 50%; border-top: 2px solid var(--deep-brand); box-shadow: 0 -30px 90px -20px var(--brand), inset 0 30px 60px -30px var(--deep-brand); pointer-events: none; }
 [data-theme="light"] .arc { box-shadow: 0 -30px 90px -30px rgba(23,84,207,.55), inset 0 30px 60px -40px rgba(23,84,207,.4); }
 
-/* ---------- connecting thread (T4): a corridor line leaves the hero and draws down the page edge as you scroll ---------- */
-.thread { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 6; pointer-events: none; }
-.thread path { fill: none; vector-effect: non-scaling-stroke; }
-.thread .base { stroke: var(--line); stroke-width: 2; }
-.thread .lit { stroke: var(--deep-brand); stroke-width: 3; filter: drop-shadow(0 0 6px var(--glow)); stroke-dasharray: 1 1; stroke-dashoffset: 0; }
-.thread .head { stroke: var(--packet); stroke-width: 6; stroke-linecap: round; stroke-dasharray: .012 2; stroke-dashoffset: 2; filter: drop-shadow(0 0 8px var(--deep-brand)); }
-@supports (animation-timeline: scroll()) {
-  .thread .lit { animation: draw linear both; animation-timeline: scroll(root block); }
-  .thread .head { animation: thread-head linear both; animation-timeline: scroll(root block); }
+/* ---------- corridor line (CL3 payment packet route) ---------- */
+/* A dotted route down the right edge of .page-flow: the sections after the hero, ending before the closing CTA. The
+   packet is sticky at mid-screen, so it travels with the reader; its fading trail is drawn upward and clipped by the
+   track. Each section's node lands lit as the packet passes (--on, scroll-driven; without support nodes stay idle). */
+@property --on { syntax: "<number>"; inherits: true; initial-value: 0; }
+.page-flow { position: relative; }
+.thread { position: absolute; top: 0; bottom: 0; right: calc(3% - 20px); width: 40px; overflow: clip; z-index: 6; pointer-events: none; }
+.thread .rail { position: absolute; top: 0; bottom: 0; left: 50%; translate: -50% 0; width: 6px; background: radial-gradient(circle, var(--line) 1.6px, transparent 2.2px) center top / 6px 12px repeat-y; }
+.thread .head { position: sticky; top: 50%; display: block; height: 0; }
+.thread .head::before { content: ""; position: absolute; bottom: 0; left: 50%; translate: -50% 0; width: 3px; height: 260px; border-radius: 2px; background: linear-gradient(to top, var(--deep-brand), transparent); }
+.thread .head i { position: absolute; left: 50%; top: 0; translate: -50% -50%; width: 16px; height: 16px; border-radius: 5px; rotate: 45deg; background: var(--deep-brand); box-shadow: 0 0 0 3px color-mix(in srgb, var(--deep-brand) 30%, transparent), 0 0 18px var(--glow); }
+.thread .head i::after { content: ""; position: absolute; inset: -6px; border-radius: 8px; border: 2px solid var(--deep-brand); opacity: 0; }
+@media (prefers-reduced-motion: no-preference) { .thread .head i::after { animation: packet-pulse 1.8s ease-out infinite; } }
+@keyframes packet-pulse { from { opacity: .8; scale: 1; } to { opacity: 0; scale: 1.9; } }
+/* A node at the top of each section on the route; --on goes 0 -> 1 as the section top crosses mid-screen. */
+.page-home .page-flow .s::after { content: ""; position: absolute; top: 0; right: 3%; width: 12px; height: 12px; translate: 50% -50%; border-radius: 50%; z-index: 7; border: 2px solid color-mix(in srgb, var(--deep-brand) calc(var(--on) * 100%), var(--line)); background: color-mix(in srgb, var(--deep-brand) calc(var(--on) * 100%), var(--sb)); box-shadow: 0 0 0 calc(var(--on) * 6px) color-mix(in srgb, var(--deep-brand) 25%, transparent), 0 0 calc(var(--on) * 16px) var(--glow); }
+@supports (animation-timeline: view()) {
+  .page-home .page-flow .s { animation: node-on linear both; animation-timeline: view(); animation-range: cover 50vh cover calc(50vh + 1px); }
 }
-@keyframes thread-head { from { stroke-dashoffset: .012; } to { stroke-dashoffset: -.988; } }
-/* A node on the corridor line at the top of each Home section. */
-.page-home .s::after { content: ""; position: absolute; top: 0; right: calc(3% - 7px); width: 14px; height: 14px; border-radius: 50%; background: var(--sb); border: 2px solid var(--deep-brand); box-shadow: 0 0 12px var(--glow); z-index: 7; }
-@media (max-width: 1023px) { .page-home .s::after { display: none; } }
-@keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
-.page-flow { position: relative; } /* the corridor line spans the sections after the hero */
+@keyframes node-on { from { --on: 0; } to { --on: 1; } }
+@media (max-width: 1023px) { .page-home .page-flow .s::after { display: none; } }
 
 /* ---------- footer ---------- */
 .footer { padding: 56px 0 40px; font-size: 14px; }

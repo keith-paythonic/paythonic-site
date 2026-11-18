@@ -205,14 +205,14 @@ export function PartnerOrbit({ title, eyebrow, lead }: { title: string; eyebrow:
   );
 }
 
-/** GF2: a glowing corridor line draws down the page edge as you scroll, with a bright head and a node at each section
- *  (globals.css ".thread", ".page-home .s::after"). Desktop only. */
+/** CL3: the corridor line as a payment packet route. A dotted route down the page edge; a glowing packet travels with
+ *  the reader and lights each section's node as it passes (globals.css ".thread", ".page-home .page-flow .s::after").
+ *  Desktop only; spans .page-flow, so it ends before the closing CTA. */
 export function Thread() {
   return (
-    <svg className="thread" viewBox="0 0 100 1000" preserveAspectRatio="none" aria-hidden="true">
-      <path className="base" d={THREAD_D} />
-      <path className="lit" pathLength={1} d={THREAD_D} />
-      <path className="head" pathLength={1} d={THREAD_D} />
-    </svg>
+    <div className="thread" aria-hidden="true">
+      <i className="rail" />
+      <span className="head"><i /></span>
+    </div>
   );
 }

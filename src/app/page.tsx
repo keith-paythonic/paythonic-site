@@ -68,9 +68,10 @@ export default function Home() {
         </section>
 
         <TrustShield eyebrow={HOME.trust.eyebrow} title={HOME.trust.title} lead={HOME.trust.lead} />
-
-        <CtaBand {...HOME.cta} />
         </div>
+
+        {/* Outside .page-flow: the corridor line ends before the closing call to action. */}
+        <CtaBand {...HOME.cta} />
       </div>
     </Page>
   );
