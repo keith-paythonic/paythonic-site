@@ -138,6 +138,12 @@ html[data-theme-switch]::view-transition-new(root) { animation: theme-square .85
 .living-logo .mark path:last-child { animation: lg-idle 10s 3s ease-in-out infinite; }
 html[data-logo-play] .living-logo .mark path:first-child { stroke-dasharray: 5200; animation: lg-frame 1.1s cubic-bezier(.6,0,.2,1) both; }
 html[data-logo-play] .living-logo .mark path:last-child { animation: lg-drop .6s .9s cubic-bezier(.3,1.4,.5,1) both, lg-idle 10s 3s ease-in-out infinite; }
+/* The big Company logo always draws in when the page opens (not only on the first page of a visit, like the nav logo),
+   and replays on hover. Class names differ from the nav's so hover restarts the animation. */
+.biglogo .living-logo .mark path:first-child { stroke-dasharray: 5200; animation: lg-frame 1.4s .2s cubic-bezier(.6,0,.2,1) both; }
+.biglogo .living-logo .mark path:last-child { animation: lg-drop .7s 1.3s cubic-bezier(.3,1.4,.5,1) both, lg-idle 10s 4s ease-in-out infinite; }
+.biglogo:hover .living-logo .mark path:first-child { animation: lg-frame-r 1.1s cubic-bezier(.6,0,.2,1) both; }
+.biglogo:hover .living-logo .mark path:last-child { animation: lg-drop-r .6s .85s cubic-bezier(.3,1.4,.5,1) both, lg-idle 10s 3s ease-in-out infinite; }
 .brand:hover .living-logo .mark path:first-child { stroke-dasharray: 5200; animation: lg-frame-r 1s cubic-bezier(.6,0,.2,1) both; }
 .brand:hover .living-logo .mark path:last-child { animation: lg-drop-r .55s .75s cubic-bezier(.3,1.4,.5,1) both, lg-idle 10s 3s ease-in-out infinite; }
 @keyframes lg-frame { from { stroke-dashoffset: 5200; } to { stroke-dashoffset: 0; } } @keyframes lg-frame-r { from { stroke-dashoffset: 5200; } to { stroke-dashoffset: 0; } }
