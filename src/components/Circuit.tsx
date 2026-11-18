@@ -24,7 +24,9 @@ function trace([x1, y1]: Pt, w1: number, [x2, y2]: Pt, w2: number): string {
   return `M${a} ${y1} H${m} V${y2} H${b}`;
 }
 
-export function Circuit({ chips, label, size = "md" }: { chips: string[]; label: string; size?: keyof typeof FONT }) {
+/** `chain`: on phones the 900-wide diagram is unreadable, so it is hidden (globals.css). Pages with a step list under the
+ *  diagram rely on that list; pages without one pass `chain` to get a vertical chain of the same chips instead. */
+export function Circuit({ chips, label, size = "md", chain = false }: { chips: string[]; label: string; size?: keyof typeof FONT; chain?: boolean }) {
   const pts = CIRCUIT_LAYOUTS[chips.length];
   if (!pts) throw new Error(`Circuit has layouts for ${Object.keys(CIRCUIT_LAYOUTS).join(" or ")} chips, got ${chips.length}`);
   const hw = chips.map((c) => halfWidth(c, size));
@@ -56,6 +58,7 @@ export function Circuit({ chips, label, size = "md" }: { chips: string[]; label:
           );
         })}
       </svg>
+      {chain && <ol className="cir-chain" aria-hidden="true">{chips.map((t) => <li key={t}>{t}</li>)}</ol>}
     </div>
   );
 }

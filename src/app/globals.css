@@ -92,7 +92,27 @@ h3 { font-size: 17px; margin: 12px 0 6px; letter-spacing: -0.01em; }
 .nav-links a[aria-current="page"] { background: var(--surface-2); color: var(--text); font-weight: 600; }
 .nav-cta { display: flex; align-items: center; gap: 14px; font-size: 14px; }
 .nav-cta .talk { color: var(--brand-ink); font-weight: 600; }
-.menu-btn { display: none; background: none; border: 1px solid var(--line); padding: 7px 10px; font: inherit; color: var(--text); }
+/* MN2 mobile menu: a 44px burger that turns into an X, a drop-down panel under the bar and a dimmed page behind it.
+   The panel and scrim sit at top: 100% of the nav (its backdrop-filter makes it the containing block). */
+.menu-btn { display: none; position: relative; width: 44px; height: 44px; padding: 0; background: none; border: 1px solid var(--line); color: var(--text); cursor: pointer; }
+.menu-btn i { position: absolute; left: 11px; width: 20px; height: 2px; border-radius: 1px; background: currentColor; transition: top .25s, rotate .25s, opacity .2s; }
+.menu-btn i:nth-child(1) { top: 14px; } .menu-btn i:nth-child(2) { top: 20px; } .menu-btn i:nth-child(3) { top: 26px; }
+.nav[data-open] .menu-btn i:nth-child(1) { top: 20px; rotate: 45deg; } .nav[data-open] .menu-btn i:nth-child(2) { opacity: 0; } .nav[data-open] .menu-btn i:nth-child(3) { top: 20px; rotate: -45deg; }
+.m-scrim { position: absolute; top: 100%; left: 0; right: 0; height: 100vh; background: rgba(2, 6, 20, .62); animation: m-fade .25s ease both; }
+[data-theme="light"] .m-scrim { background: rgba(12, 24, 52, .35); }
+.m-menu { position: absolute; top: 100%; left: 0; right: 0; max-height: calc(100vh - var(--nav-h)); overflow-y: auto; padding: 6px 20px 22px; background: var(--bg); border-bottom: 1px solid var(--line); box-shadow: 0 18px 30px rgba(0, 0, 0, .3); animation: m-drop .3s cubic-bezier(.2, .8, .2, 1) both; }
+.m-menu ol { list-style: none; margin: 0; padding: 0; }
+.m-menu ol a { display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 4px; border-bottom: 1px solid var(--line); color: var(--text); font-size: 17px; font-weight: 500; }
+.m-menu small { font: 500 11px var(--font-plex-mono); letter-spacing: .06em; color: var(--brand-ink); }
+.m-menu .arrow { margin-left: auto; color: var(--muted); font-size: .8em; }
+.m-menu a[aria-current="page"] { color: var(--brand-ink); font-weight: 700; }
+.m-cta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+.m-cta .btn { width: 100%; min-height: 46px; justify-content: center; } .m-cta .soon { display: grid; } .m-cta .soon em { right: 6px; }
+.m-foot { margin: 16px 0 0; font-size: 12px; color: var(--muted); }
+@keyframes m-drop { from { opacity: 0; translate: 0 -10px; } }
+@keyframes m-fade { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .m-menu, .m-scrim { animation: none; } .menu-btn i { transition: none; } }
+@media (min-width: 1024px) { .m-menu, .m-scrim { display: none; } }
 
 /* Theme toggle (TI1 sun/moon morph). Dark shows the moon; the shadow slides off and rays grow into a sun. */
 .theme-toggle { display: inline-grid; place-items: center; width: 38px; height: 38px; padding: 0; border: 1px solid var(--line); background: transparent; color: var(--text); cursor: pointer; clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%); }
@@ -131,7 +151,7 @@ html[data-logo-play] .living-logo .mark path:last-child { animation: lg-drop .6s
 .hero-copy { max-width: 560px; padding: 96px 0; position: relative; z-index: 3; }
 .hero h1 { margin: 18px 0 20px; }
 .hero .lead { color: var(--deep-muted); } .hero .lead b { color: var(--deep-text); }
-.pill { display: inline-block; font: 500 12px var(--font-plex-mono); letter-spacing: .06em; padding: 6px 12px; border: 1px solid var(--deep-line); color: var(--deep-muted); }
+.pill { display: inline-block; text-wrap: balance; font: 500 12px var(--font-plex-mono); letter-spacing: .06em; padding: 6px 12px; border: 1px solid var(--deep-line); color: var(--deep-muted); }
 .chips { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 28px; font-size: 13px; color: var(--deep-muted); }
 .chips span { display: flex; align-items: center; gap: 7px; } .chips svg { color: var(--deep-brand); }
 .globe { position: absolute; top: 0; bottom: 0; right: 0; width: 56%; z-index: 1; -webkit-mask-image: linear-gradient(90deg, transparent, #000 22%); mask-image: linear-gradient(90deg, transparent, #000 22%); }
@@ -183,6 +203,14 @@ html[data-logo-play] .living-logo .mark path:last-child { animation: lg-drop .6s
     .flip .back { transform: rotateY(180deg); animation: flip-back linear both; animation-timeline: --flips; animation-range: contain calc(12% + var(--i) * 18%) contain calc(26% + var(--i) * 18%); }
   }
 }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) and (max-width: 640px) {
+    /* The pinned stage (4 stacked cards) is taller than a phone screen, so each card flips on its own instead. */
+    .flip-pin { height: auto; } .flip-stage { position: static; min-height: 0; } .flips { gap: 12px; }
+    .flip { view-timeline-name: --card; height: 150px; }
+    .flip .front, .flip .back { animation-timeline: --card; animation-range: cover 35% cover 55%; }
+  }
+}
 @keyframes flip-front { to { transform: rotateY(-180deg); } }
 @keyframes flip-back { from { transform: rotateY(180deg); } to { transform: rotateY(0deg); } }
 
@@ -190,12 +218,12 @@ html[data-logo-play] .living-logo .mark path:last-child { animation: lg-drop .6s
 .story-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 30px; }
 .story-step { display: grid; justify-items: center; text-align: center; gap: 6px; }
 .story-step .glass { width: 180px; height: 180px; }
-.story-step h3 { font-size: 24px; } .story-step p { color: var(--sm); margin: 0; }
+.story-step h3 { font-size: 24px; line-height: 1.1; } .story-step p { color: var(--sm); margin: 0; }
 .story-dots { display: none; }
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     .story-pin { height: 3200px; view-timeline-name: --story; }
-    .story-pin .story-list { position: sticky; top: 0; height: 100vh; display: grid; place-items: center; grid-template-columns: 1fr; margin: 0 auto; overflow: hidden; }
+    .story-pin .story-list { position: sticky; top: var(--nav-h); height: calc(100vh - var(--nav-h)); display: grid; place-items: center; grid-template-columns: 1fr; margin: 0 auto; overflow: hidden; }
     .story-pin .story-step { position: absolute; inset: 0; margin: auto; height: fit-content; width: min(620px, 92%); opacity: 0; animation: stio linear both; animation-timeline: --story; animation-range: contain calc(var(--i) * 25%) contain calc(var(--i) * 25% + 25%); }
     .story-pin .story-step:first-child { animation-name: stio-first; } .story-pin .story-step:nth-child(4) { animation-name: stio-last; }
     .story-pin .story-step .glass { width: 250px; height: 250px; } .story-pin .story-step h3 { font-size: 46px; letter-spacing: -.03em; } .story-pin .story-step p { font-size: 19px; }
@@ -208,6 +236,7 @@ html[data-logo-play] .living-logo .mark path:last-child { animation: lg-drop .6s
 @keyframes stio-last { 0% { opacity: 0; filter: blur(14px); transform: translateY(60px) scale(.96); } 30%, 100% { opacity: 1; filter: none; transform: none; } }
 
 /* ---------- circuit trace (A3): each trace lights start to end and stays lit, chips switch on, all pulse, reset ---------- */
+.cir-chain { display: none; } /* phone-only chain (see Circuit.tsx) */
 .circuit-box { position: relative; margin-top: 30px; border: 1px solid var(--sl); clip-path: var(--cut);
   background: radial-gradient(ellipse at 50% 45%, color-mix(in srgb, var(--brand) 16%, transparent), transparent 65%), color-mix(in srgb, var(--deep-text) 3%, transparent); }
 .cir { width: 100%; display: block; }
@@ -368,8 +397,8 @@ html[data-logo-play] .living-logo .mark path:last-child { animation: lg-drop .6s
 .hub-label { position: absolute; top: calc(100% + 6px); left: 50%; translate: -50% 0; white-space: nowrap; font-weight: 600; font-size: 14px; color: var(--st); }
 
 /* ---------- FAQ (Z1) ---------- */
-.faq { max-width: 920px; margin-top: 24px; } .faq details { border-bottom: 1px solid var(--sl, var(--line)); padding: 18px 0; }
-.faq summary { font-weight: 600; cursor: pointer; font-size: 18px; } .faq details p { color: var(--sm, var(--muted)); margin: 10px 0 0; }
+.faq { max-width: 920px; margin-top: 24px; } .faq details { border-bottom: 1px solid var(--sl, var(--line)); }
+.faq summary { font-weight: 600; cursor: pointer; font-size: 18px; padding: 18px 0; } .faq details p { color: var(--sm, var(--muted)); margin: -6px 0 18px; }
 
 /* ---------- closing band (E4 glowing arc, centred) ---------- */
 .cta-band { padding: 140px 0; text-align: center; }
@@ -404,14 +433,15 @@ html[data-logo-play] .living-logo .mark path:last-child { animation: lg-drop .6s
 .footer .cols { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 32px; }
 .footer .cols p { margin: 12px 0 0; max-width: 300px; color: var(--sm); }
 .footer h4 { font: 500 12px var(--font-plex-mono); letter-spacing: .12em; color: var(--st); margin: 0 0 12px; }
-.footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; color: var(--sm); }
+.footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; color: var(--sm); }
+.footer ul a { display: inline-block; padding: 12px 0; } /* 44px tap targets */
 .footer a:hover { color: var(--st); }
 .footer .legal { border-top: 1px solid var(--sl); margin-top: 40px; padding-top: 20px; font-size: 12.5px; display: grid; gap: 6px; color: var(--sm); }
 
 /* ---------- live product scenes (used in the device frame and inner pages) ---------- */
 .scene { display: flex; align-items: center; justify-content: center; padding: 16px; min-height: 180px; }
 .lv { width: 100%; max-width: 360px; background: var(--surface); color: var(--text); border: 1px solid var(--line); padding: 12px 14px; font-size: 12.5px; display: grid; gap: 8px; box-shadow: 0 14px 28px -18px rgba(10,20,41,.45); text-align: left; clip-path: var(--cut); }
-.lvh { font: 500 10px var(--font-plex-mono); letter-spacing: .06em; color: var(--muted); text-transform: uppercase; }
+.lvh { font: 500 11px var(--font-plex-mono); letter-spacing: .06em; color: var(--muted); text-transform: uppercase; }
 .lvr { display: grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items: center; } .lvr.two { grid-template-columns: 1fr auto; }
 .mut { color: var(--muted); }
 .bar { width: 72px; height: 6px; background: var(--surface-2); border-radius: 3px; overflow: hidden; } .bar i { display: block; height: 100%; background: var(--line); }
@@ -469,11 +499,12 @@ html[data-logo-play] .living-logo .mark path:last-child { animation: lg-drop .6s
 /* ---------- responsive ---------- */
 @media (max-width: 1023px) {
   .nav-links, .nav-cta .talk { display: none; }
-  .menu-btn { display: inline-block; }
-  .nav[data-open] .nav-links { display: grid; position: absolute; top: var(--nav-h); left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--line); padding: 12px 20px; margin: 0; }
+  .menu-btn { display: inline-block; } .theme-toggle { width: 44px; height: 44px; } /* 44px tap targets */
   .nav .wrap { gap: 14px; } .nav-cta { margin-left: auto; }
   .grid3, .icards, .integ3, .story-list, .cir-steps { grid-template-columns: 1fr 1fr; }
-  .row2, .contact, .mv, .footer .cols, .show, .dev, .flips { grid-template-columns: 1fr; }
+  .row2, .contact, .mv, .footer .cols, .dev, .flips, .pl-state { grid-template-columns: 1fr; }
+  .pl-rail { font-size: 11px; } .pl-card { height: auto !important; } .pl-state { position: static !important; opacity: 1 !important; animation: none !important; }
+  .pl-pin { height: auto; } .pl-stage { position: static; min-height: 0; }
   .row2.rev > :first-child { order: 0; }
   .hero { flex-direction: column; align-items: stretch; min-height: 0; } .hero-copy { padding: 64px 0 8px; }
   .globe { position: relative; order: 2; width: 100%; height: 300px; -webkit-mask-image: none; mask-image: none; } .globe-note { display: none; }
@@ -481,8 +512,23 @@ html[data-logo-play] .living-logo .mark path:last-child { animation: lg-drop .6s
 }
 @media (max-width: 640px) {
   .wrap { padding: 0 20px; } .s { padding: 64px 0; }
+  /* Phone orbit: small enough that outer labels stay on screen at 375-390px wide. */
+  .orbit { width: 276px; height: 276px; } .ring { --r: 138px; } .ring.inner { inset: 50px; --r: 88px; }
+  .ring em { font-size: 10px; padding: 5px 7px; } .hub { width: 120px; height: 120px; } .ring > span { display: none; }
+  .orbit-chips { position: static; width: auto; height: auto; overflow: visible; clip-path: none; white-space: normal; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 28px 0 0; }
+  .orbit-chips li { font: 500 12px var(--font-plex-mono); padding: 8px 12px; background: var(--surface); color: var(--text); border: 1px solid var(--sl); }
   .grid3, .icards, .integ3, .form .two, .story-list, .cir-steps { grid-template-columns: 1fr; }
-  .nav-cta .soon { display: none; } .circuit-box { overflow-x: auto; } .cir { min-width: 720px; }
+  .nav-cta .soon { display: none; }
+  /* Circuit: hidden on phones (unreadable at this width); the step list under it, or the chain, carries the steps. */
+  .cir { display: none; } .circuit-box:not(:has(.cir-chain)) { display: none; }
+  .circuit-box:has(.cir-chain) { border: 0; clip-path: none; background: none; padding: 0; }
+  .cir-chain { display: grid; gap: 22px; list-style: none; margin: 24px 0 0; padding: 0; }
+  .cir-chain li { position: relative; padding: 14px 16px; font: 600 14px var(--font-plex-mono); color: var(--st); background: var(--sc, var(--surface)); border: 1px solid var(--deep-brand); }
+  .cir-chain li + li::before { content: ""; position: absolute; left: 50%; bottom: 100%; width: 2px; height: 22px; background: var(--deep-brand); box-shadow: 0 0 6px var(--glow); }
+  .cir-list li { animation: none !important; } /* the highlight follows the hidden diagram; keep the list fully readable */
+  .form input, .form textarea { font-size: 16px; } /* below 16px iOS Safari zooms in on focus */
+  .pl-state { padding: 22px 20px; gap: 20px; }
+  .co-hero .lead { text-align: left; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }

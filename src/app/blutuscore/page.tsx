@@ -39,7 +39,7 @@ export default function BlutusCorePage() {
           <p className="eyebrow">Architecture</p>
           <h2>Modular by design</h2>
           <p className="lead">A transfer enters through the partner APIs, passes quoting, compliance, routing and the ledger, and leaves through the payout partner best suited to it.</p>
-          <Circuit chips={CIRCUIT_MODULES} label="A transfer moving from the sender through quote and FX, compliance, routing and the ledger to the payout partner." />
+          <Circuit chips={CIRCUIT_MODULES} chain label="A transfer moving from the sender through quote and FX, compliance, routing and the ledger to the payout partner." />
           <p className="caption">Illustrative flow.</p>
         </div>
       </section>
